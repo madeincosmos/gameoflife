@@ -48,7 +48,7 @@ function stopAnimation () {
 
 function startAnimation () {
 	if (! animationTimeout ) {
-		animationTimeout = setInterval( animateStep, 500 );
+		animationTimeout = setInterval( animateStep, 400 );
 	}
 }
 
