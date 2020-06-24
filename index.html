@@ -1,6 +1,7 @@
 <html>
 	<head>
 		<title>Gra w życie</title>
+
 		<script type="text/javascript" src="game.js"></script>		
 		<script type="text/javascript" src="life.js"></script>
 		<link rel="stylesheet" type="text/css" href="styles.css">
@@ -13,8 +14,20 @@
 				<button id="reset">reset</button>					
 				<button id="pause">||</button>				
 				<button id="next">&gt;</button>			
-				<button id="play">&gt;&gt;</button>
+				<button id="play" class="primary" >&gt;&gt;</button>
 			</div>
 		</div>
+		<div class="instructions">
+			<h3>Czy wiesz, co to gra w życie?</h3> 
+			<p>Reguły są bardzo proste. Dla każdego pola na planszy sprawdzamy wszystkich ośmiu sąsiadów dookoła, i na tej podstawie wyliczamy jej nowy stan:</p>
+			<ul>
+				<li>Komórka ożywa kiedy ma dokładnie trzech aktywnych sąsiadów;</li>
+				<li>Aktywne komórki które mają dwóch lub trzech aktywnych sąsiadów pozostają aktywne do następnej tury;</li>
+				<li>Jeżeli komórka ma mniej niż dwóch lub więcej niż trzech aktywnych sąsiadów to w następnej turze się wygasza.</li>
+			</ul>
+
+		<p>Aż trudno uwierzyć, że z tak prostych trzech reguł mogą zadziać się aż tak skomplikowane rzeczy!</p>
+		<p>Przekonaj się, jak to działa. Narysuj dowolny kształt, naciśnij przycisk <strong>&gt;&gt;</strong> by uruchomić animację, i... zobacz, co się stanie.</p>
+		</div> 
 	</body>
 </html>

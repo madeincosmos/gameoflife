@@ -1,20 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Courgette&family=Pacifico&display=swap');
+
 body {
 	background-color: #fafafa;
+	font-family: Helvetica, Arial, sans-serif;
+	display: flex;
+	color: #433232;
+	line-height: 1.5em;
 }
 
-h1 {
-	font-family: "SignPainter";
+h1, h3 {
+	font-family: "Pacifico", "SignPainter", cursive;
 	color: #660000;
-	font-size: 3rem;
-	text-align: center;
 	width: 100%;
 	margin-bottom: 0.5em;
 }
 
+h1 {
+	font-size: 3rem;
+	text-align: center;	
+	margin-bottom: 1em;
+}
+
+h3 {
+	font-size: 2rem;
+}
 .container {
-	margin: 2em auto;
+	margin: 1em 2em;
 	width: 800px;
 }
+
+.instructions {
+	margin: 6em 3em 0 1em;
+}
+
+.instructions li {
+	list-style-type: none;
+}
+
+.instructions li:before {
+	content: '\25A0';
+	color: #ff0000;
+	font-weight: bold;
+	display: inline-block;
+	width: 1.5em;
+	margin-left: -1.5em;
+}
+
 
 canvas {
 	display: block;
@@ -25,13 +56,19 @@ canvas {
 }
 
 button {
-	width: 40px;
+	width: 50px;
+	font-weight: bold;
 	text-align: center;
 	background-color: #dedede;
 	border: 1px solid #666;
 	margin: 0.5em;
-	height: 22px;
-	line-height: 20px;
+	height: 25px;
+	line-height: 21px;
+}
+
+button.primary {
+	background-color: #cc0000;
+	color: #fff;
 }
 
 .nav button {
@@ -45,4 +82,8 @@ button {
 .nav {
 	text-align: right;
 	width: 100%;
+}
+
+strong {
+	color: #ff0000;
 }
