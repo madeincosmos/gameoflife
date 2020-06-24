@@ -9,6 +9,8 @@ let deadColor = "#ffffff";
 let state1 = Array( rows ).fill().map( () => Array( columns ).fill( 0 ) );
 let state2 = Array( rows ).fill().map( () => Array( columns ).fill( 0 ) );
 
+let animationTimeout = null;
+
 let oddCycle = true;
 
 let glider = [
@@ -32,11 +34,23 @@ document.addEventListener('DOMContentLoaded', function(event) {
 			}
 		}
 	}
-
+	document.getElementById( 'pause' ).addEventListener( 'click', stopAnimation );	
 	document.getElementById( 'next' ).addEventListener( 'click', animateStep );	
+	document.getElementById( 'play' ).addEventListener( 'click', startAnimation );		
 });
 
 
+function stopAnimation () {
+	clearInterval( animationTimeout );
+	animationTimeout = null;
+}
+
+
+function startAnimation () {
+	if (! animationTimeout ) {
+		animationTimeout = setInterval( animateStep, 500 );
+	}
+}
 
 function animateStep( ) { 
 
