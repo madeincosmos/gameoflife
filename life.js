@@ -24,6 +24,8 @@ let glider = [
 	[2, 2]
 ];
 
+let lastPaintedPixel = null;
+let isPainting = false;
 
 document.addEventListener('DOMContentLoaded', function(event) {
 	const canvas = document.getElementById( 'game' );
@@ -45,14 +47,34 @@ document.addEventListener('DOMContentLoaded', function(event) {
 	canvas.addEventListener( 'mousedown', function(event) {
 		stopAnimation();
 
-		let point = getCursorPosition( canvas, event );
+		paint( event );
+
+		isPainting = true;
+	});
+
+	canvas.addEventListener( 'mousemove', function(event) {
+		if ( isPainting ) {
+			paint( event );
+		}
+	});	
+
+	canvas.addEventListener( 'mouseup', function(event) {
+		lastPaintedPixel = null;
+		isPainting = false;
+	});		
+});
+
+function paint( event ) {
+	let point = getCursorPosition( event );
+
+	if ( !lastPaintedPixel || ( lastPaintedPixel.x != point.x || lastPaintedPixel.y != point.y ) ) { 
 
 		currentState[ point.x ][ point.y ] = currentState[ point.x ][ point.y ] ? 0 : 1;
 		renderBlock(point.x, point.y, currentState[ point.x ][ point.y ] );
 
-	});
-});
-
+		lastPaintedPixel = point;
+	}
+}
 
 function stopAnimation () {
 	clearInterval( animationTimeout );
@@ -66,9 +88,7 @@ function startAnimation () {
 	}
 }
 
-function getCursorPosition( canvas, event ) {
-	const rect = canvas.getBoundingClientRect();
-
+function getCursorPosition( event ) {
 	const x = event.offsetX;
 	const y = event.offsetY;
 
