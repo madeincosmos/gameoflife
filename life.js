@@ -1,6 +1,6 @@
 let blockSize = 10;
-let columns = 80;
-let rows = 60;
+let columns = 60;
+let rows = 80;
 
 let ctx = null;
 let aliveColor = "#ff0000";
@@ -42,13 +42,13 @@ document.addEventListener('DOMContentLoaded', function(event) {
 	document.getElementById( 'next' ).addEventListener( 'click', animateStep );	
 	document.getElementById( 'play' ).addEventListener( 'click', startAnimation );		
 
-	canvas.addEventListener( 'click', function(event) {
+	canvas.addEventListener( 'mousedown', function(event) {
 		stopAnimation();
 
 		let point = getCursorPosition( canvas, event );
 
-		newState[ point.x ][ point.y ] = newState[ point.x ][ point.y ] ? 0 : 1;
-		renderBlock(point.x, point.y, newState[ point.x ][ point.y ] );
+		currentState[ point.x ][ point.y ] = currentState[ point.x ][ point.y ] ? 0 : 1;
+		renderBlock(point.x, point.y, currentState[ point.x ][ point.y ] );
 
 	});
 });
@@ -79,11 +79,6 @@ function getCursorPosition( canvas, event ) {
 }
 
 function animateStep( ) { 
-
-	currentState = oddCycle ? state1 : state2;
-	newState = oddCycle ? state2 : state1;
-
-	oddCycle = !oddCycle;
 
 	for( let i = 0; i < rows; i++ ) {
 		for ( let j = 0; j < columns; j++ ) {
@@ -131,6 +126,10 @@ function animateStep( ) {
 		}
 	}	
 
+	currentState = oddCycle ? state1 : state2;
+	newState = oddCycle ? state2 : state1;
+
+	oddCycle = !oddCycle;
 }
 
 function setState( stateTable, data = [] ) {
