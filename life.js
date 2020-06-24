@@ -9,6 +9,9 @@ let deadColor = "#ffffff";
 let state1 = Array( rows ).fill().map( () => Array( columns ).fill( 0 ) );
 let state2 = Array( rows ).fill().map( () => Array( columns ).fill( 0 ) );
 
+let currentState = state1;
+let newState = state2;
+
 let animationTimeout = null;
 
 let oddCycle = true;
@@ -23,7 +26,8 @@ let glider = [
 
 
 document.addEventListener('DOMContentLoaded', function(event) {
-	ctx = document.getElementById( 'game' ).getContext( '2d' );
+	const canvas = document.getElementById( 'game' );
+	ctx = canvas.getContext( '2d' );
 
 	setState( state1, glider );
 
@@ -37,6 +41,16 @@ document.addEventListener('DOMContentLoaded', function(event) {
 	document.getElementById( 'pause' ).addEventListener( 'click', stopAnimation );	
 	document.getElementById( 'next' ).addEventListener( 'click', animateStep );	
 	document.getElementById( 'play' ).addEventListener( 'click', startAnimation );		
+
+	canvas.addEventListener( 'click', function(event) {
+		stopAnimation();
+
+		let point = getCursorPosition( canvas, event );
+
+		newState[ point.x ][ point.y ] = newState[ point.x ][ point.y ] ? 0 : 1;
+		renderBlock(point.x, point.y, newState[ point.x ][ point.y ] );
+
+	});
 });
 
 
@@ -52,14 +66,24 @@ function startAnimation () {
 	}
 }
 
+function getCursorPosition( canvas, event ) {
+	const rect = canvas.getBoundingClientRect();
+
+	const x = event.offsetX;
+	const y = event.offsetY;
+
+	return {
+		x: parseInt( x / blockSize ) ,
+		y: parseInt( y / blockSize )
+	}
+}
+
 function animateStep( ) { 
 
-	let currentState = oddCycle ? state1 : state2;
-	let newState = oddCycle ? state2 : state1;
+	currentState = oddCycle ? state1 : state2;
+	newState = oddCycle ? state2 : state1;
 
 	oddCycle = !oddCycle;
-
-//	let newState = Array( rows ).fill().map( () => Array( columns ).fill( 0 ) );
 
 	for( let i = 0; i < rows; i++ ) {
 		for ( let j = 0; j < columns; j++ ) {
